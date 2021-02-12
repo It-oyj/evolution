@@ -14,9 +14,6 @@ var yes, no;
 var yeah, nope;
 
 var score = 0;
-
-
-
 localStorage["HighestScore"] = 0;
 
 function preload() {
@@ -37,8 +34,6 @@ function preload() {
   cellin = loadImage("cellin.png");
   yes = loadImage("y.png");
   no = loadImage("n.png");
-
-  ;
 
 }
 
