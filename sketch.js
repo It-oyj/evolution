@@ -8,10 +8,10 @@ var ground, invisibleGround, groundImage, backgg, bg;
 
 var cloudsGroup, cloudImage;
 var obstaclesGroup, obstacle1;
-var obstacle1,backg;
-var cellin,cool;
-var yes,no;
-var yeah,nope;
+var obstacle1, backg;
+var cellin, cool;
+var yes, no;
+var yeah, nope;
 
 var score = 0;
 
@@ -35,8 +35,8 @@ function preload() {
   obstacle5 = loadImage("obsssss.png");
   obstacle6 = loadImage("obssssssss.png");
   cellin = loadImage("cellin.png");
-  yes=loadImage("y.png");
-  no=loadImage("n.png");
+  yes = loadImage("y.png");
+  no = loadImage("n.png");
 
   ;
 
@@ -44,6 +44,11 @@ function preload() {
 
 function setup() {
   createCanvas(1000, 600);
+  backg=createSprite(500,300);
+  backg.addImage("ok",backgg)
+  backg.x = backg.width / 2;
+  backg.velocityX=-5;
+  backg.scale =2.2;
 
   cell = createSprite(80, 430, 10, 10);
 
@@ -51,25 +56,21 @@ function setup() {
   cell.addImage("collided", cellcollided);
   cell.scale = 0.5;
 
-  cool = createSprite(450,250,555,1014);
+  cool = createSprite(450, 250, 555, 1014);
   cool.visible = false;
-  cool.addImage("ainwai",cellin);
-  cool.scale=1;
-  
-yeah=createSprite(100,200,20,20);
-yeah.addImage("yo",yes);
-nope=createSprite(500,200,20,20);
-nope.addImage("nah",no)
+  cool.addImage("ainwai", cellin);
+  cool.scale = 1;
+
+  yeah = createSprite(100, 200, 20, 20);
+  yeah.addImage("yo", yes);
+  nope = createSprite(500, 200, 20, 20);
+  nope.addImage("nah", no)
   ground = createSprite(500, 580, 1000, 10);
   ground.scale = 1;
 
 
   ground.x = ground.width / 2;
   ground.velocityX = -(6 + 3 * score / 100);
-  // backg=createSprite(500,300);
-  // backg.addImage("ok",backgg)
-  // backg.x = backg.width / 2;
-  // backg.velocityX=-1;
 
 
 
@@ -88,7 +89,7 @@ nope.addImage("nah",no)
 function draw() {
 
   background(255);
-  
+
   text("Score: " + score, 500, 50);
 
   if (gameState === PLAY) {
@@ -104,6 +105,10 @@ function draw() {
     if (ground.x < 0) {
       ground.x = ground.width / 2;
     }
+    console.log(backg.x);
+    if (backg.x < 0) {
+      backg.x = backg.width / 2;
+    }
 
     cell.collide(invisibleGround);
     spawnClouds();
@@ -115,6 +120,7 @@ function draw() {
   }
   else if (gameState === PAUSE) {
     
+    backg.velocityX=0;
     ground.velocityX = 0;
     cell.velocityY = 0;
     obstaclesGroup.setVelocityXEach(0);
@@ -147,11 +153,11 @@ function draw() {
   drawSprites();
   if (score === 1000) {
     gameState = PAUSE;
-    cool.visible=true;
+    cool.visible = true;
   }
-  if(score===10){
-text("is cell the smallest unit of life",50,50);
-gameState=PAUSE;
+  if (score === 10) {
+    text("is cell the smallest unit of life", 50, 50);
+    gameState = PAUSE;
   }
 
 }
